@@ -2,15 +2,13 @@ import re
 from yaml import load, FullLoader
 from collections.abc import Mapping
 
-
-
 class Content(Mapping):
 
     __delimiter = r"^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimiter, re.MULTILINE)
 
     def load(cls, string):
-        _, fm, content = __regex.split(string, 2)
+        _, fm, content = cls.__regex.split(string, 2)
         metadata = load(fm, Loader=FullLoader)
         return cls(metadata, content)
 
@@ -41,7 +39,7 @@ class Content(Mapping):
 
     def __repr__(self):
         data = {}
-        for key in self.data.items():
+        for key, value in self.data.items():
             if key != "content":
                 data[key] = value
-            return str(data)
+        return str(data)
