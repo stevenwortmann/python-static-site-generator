@@ -7,7 +7,9 @@ def main(source="content", dest="dist"):
     "source": source,
     "dest": dest,
     "parsers": [
-    ssg.parsers.ResourceParser(),
+        ssg.parsers.ResourceParser(),
+        ssg.parsers.MarkdownParser(),
+        ssg.parsers.ReStructuredTextParser(),
     ]
     }
 
